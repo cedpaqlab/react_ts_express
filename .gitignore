@@ -1,0 +1,9 @@
+# IDE/Editor configurations
+.idea/
+.vscode/
+
+# Environment files
+.env
+
+# Logs
+*.log

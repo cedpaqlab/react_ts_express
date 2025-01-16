@@ -1,0 +1,6 @@
+[submodule "client"]
+	path = client
+	url = git@github.com:cedpaqlab/react_ts_express.git
+[submodule "backend"]
+	path = backend
+	url = git@github.com:cedpaqlab/react_ts_express.git
