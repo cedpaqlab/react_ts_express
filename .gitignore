@@ -7,3 +7,10 @@
 
 # Logs
 *.log
+
+# Exclure les dossiers de build
+backend/dist/
+client/dist/
+
+# Exclure d'autres fichiers générés ou spécifiques
+backend/config.js

@@ -7,7 +7,7 @@ COPY . .
 RUN npm run build
 
 # Étape 2 : Serveur web pour le build
-FROM nginx:1.23
-COPY --from=build /app/build /usr/share/nginx/html
+FROM nginx:alpine AS client
+COPY --from=build /app/dist /usr/share/nginx/html
 EXPOSE 80
 CMD ["nginx", "-g", "daemon off;"]
