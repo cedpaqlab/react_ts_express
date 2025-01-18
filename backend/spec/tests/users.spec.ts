@@ -7,7 +7,7 @@ import logger from 'jet-logger';
 import app from '@src/server';
 
 import UserRepo from '@src/repos/UserRepo';
-import User, { IUser } from '@src/models/User';
+import User, { IUser } from '@src/entities/User';
 import { USER_NOT_FOUND_ERR } from '@src/services/UserService';
 
 import HttpStatusCodes from '@src/common/HttpStatusCodes';

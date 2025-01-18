@@ -3,7 +3,7 @@ import { transform } from 'jet-validators/utils';
 
 import HttpStatusCodes from '@src/common/HttpStatusCodes';
 import UserService from '@src/services/UserService';
-import User from '@src/models/User';
+import User from '@src/entities/User';
 
 
 import { parseReq, IReq, IRes } from './common';

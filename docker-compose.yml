@@ -1,33 +1,69 @@
 services:
-  client:
+  client-dev:
     build:
       context: ./client
-      dockerfile: Dockerfile
+      dockerfile: Dockerfile.dev
     ports:
-      - "3001:80" # Accès au frontend
+      - "5173:5173" # Port par défaut de Vite en développement
+    volumes:
+      - ./client:/app
+      - /app/node_modules
     networks:
       - app-network
+    profiles:
+      - dev
 
-  backend:
+  client-prod:
+    build:
+      context: ./client
+      dockerfile: Dockerfile.prod
+    ports:
+      - "80:80" # Frontend en production accessible sans port explicite
+    networks:
+      - app-network
+    profiles:
+      - prod
+
+  backend-dev:
     build:
       context: ./backend
-      dockerfile: Dockerfile
+      dockerfile: Dockerfile.dev
     ports:
-      - "3002:3000" # Accès au backend
+      - "3000:3000" # Backend accessible sur localhost:3001
+    volumes:
+      - ./backend:/app
+      - /app/node_modules
     environment:
       - NODE_ENV=development
       - MAIL_HOST=mailpit
       - MAIL_PORT=1025
     networks:
       - app-network
+    profiles:
+      - dev
+
+  backend-prod:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile.prod
+    ports:
+      - "3000:3000" # Backend interne, utilise un reverse proxy pour le mapping
+    environment:
+      - NODE_ENV=production
+    networks:
+      - app-network
+    profiles:
+      - prod
 
   mailpit:
     image: 'axllent/mailpit:latest'
     ports:
-      - "8025:8025" # Web interface
-      - "1025:1025" # SMTP server
+      - "8025:8025"
+      - "1025:1025"
     networks:
       - app-network
+    profiles:
+      - dev
 
   postgres:
     image: postgres:latest
@@ -41,6 +77,9 @@ services:
       - postgres-data:/var/lib/postgresql/data
     networks:
       - app-network
+    profiles:
+      - dev
+      - prod
 
 networks:
   app-network:

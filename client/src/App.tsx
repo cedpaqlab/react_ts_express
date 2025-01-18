@@ -1,35 +1,45 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import React, { useState } from 'react';
+import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
+import './styles/App.css';
+import logo from './assets/logo.svg';
+import en from './locales/en.json';
+import fr from './locales/fr.json';
+import Home from './pages/Home';
+import Configurator from './pages/Configurator';
+
+const translations = { en, fr };
 
 function App() {
-  const [count, setCount] = useState(0)
+    const [locale, setLocale] = useState<'en' | 'fr'>('en'); // Langue par défaut : anglais
 
-  return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    const t = (key: string) => key.split('.').reduce((o, i) => (o as any)[i], translations[locale]);
+
+    return (
+        <Router>
+            <div className="App">
+                <header className="App-header">
+                    <img src={logo} className="App-logo" alt="Company Logo"/>
+                    <div>
+                        {locale === 'en' ? (
+                            <button onClick={() => setLocale('fr')}>Français</button>
+                        ) : (
+                            <button onClick={() => setLocale('en')}>English</button>
+                        )}
+                    </div>
+                    <nav>
+                        <Link to="/">{t('header.home')}</Link> | <Link to="/configurator">{t('main.configure')}</Link>
+                    </nav>
+                </header>
+                <Routes>
+                    <Route path="/" element={<Home t={t}/>}/>
+                    <Route path="/configurator" element={<Configurator t={t}/>}/>
+                </Routes>
+                <footer className="App-footer">
+                    <p>{t('footer.copyright')}</p>
+                </footer>
+            </div>
+        </Router>
+    );
 }
 
-export default App
+export default App;

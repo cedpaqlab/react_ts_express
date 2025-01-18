@@ -1,0 +1,24 @@
+{
+  "header": {
+    "home": "Home",
+    "welcome": "Welcome to YourAPI",
+    "description": "Your tool for personalized API creation."
+  },
+  "main": {
+    "start": "Start creating robust and scalable APIs with ease.",
+    "configure": "Configure a new API"
+  },
+  "footer": {
+    "copyright": "© 2025 YourAPI. All rights reserved."
+  },
+
+  "configurator": {
+    "title": "API Configurator",
+    "description": "Set up your API with the parameters of your choice.",
+    "form": {
+      "apiName": "API Name",
+      "placeholder": "Enter your API name",
+      "submit": "Save Configuration"
+    }
+  }
+}

@@ -2,7 +2,7 @@ import { RouteError } from '@src/common/route-errors';
 import HttpStatusCodes from '@src/common/HttpStatusCodes';
 
 import UserRepo from '@src/repos/UserRepo';
-import { IUser } from '@src/models/User';
+import { IUser } from '@src/entities/User';
 
 
 /******************************************************************************
