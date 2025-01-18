@@ -13,7 +13,7 @@ services:
       context: ./backend
       dockerfile: Dockerfile
     ports:
-      - "3000:3000" # Accès au backend
+      - "3002:3000" # Accès au backend
     environment:
       - NODE_ENV=development
     networks:
